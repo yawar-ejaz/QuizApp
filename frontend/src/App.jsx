@@ -5,7 +5,7 @@ import {
   CreateUsername,
   CreatePassword,
   Dashboard,
-} from "./pages";
+} from "./pages/public";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
