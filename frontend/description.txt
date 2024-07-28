@@ -1,0 +1,51 @@
+Folder Structure:
+
+frontend/
+├── public/
+│   ├── index.html
+│   ├── manifest.json
+│   └── ...
+├── src/
+│   ├── assets/
+│   │   ├── images/
+│   │   ├── styles/
+│   │   └── ...
+│   ├── components/
+│   │   ├── Auth/
+│   │   │   ├── Login.js
+│   │   │   ├── Register.js
+│   │   │   ├── ForgotPassword.js
+│   │   │   └── ...
+│   │   ├── Quiz/
+│   │   │   ├── QuizList.js
+│   │   │   ├── QuizDetail.js
+│   │   │   ├── CreateQuiz.js
+│   │   │   └── ...
+│   │   └── Common/
+│   │       ├── Header.js
+│   │       ├── Footer.js
+│   │       ├── PrivateRoute.js
+│   │       └── ...
+│   ├── contexts/
+│   │   ├── AuthContext.js
+│   │   ├── QuizContext.js
+│   │   └── ...
+│   ├── hooks/
+│   │   ├── useAuth.js
+│   │   ├── useQuiz.js
+│   │   └── ...
+│   ├── pages/
+│   │   ├── Home.js
+│   │   ├── QuizPage.js
+│   │   ├── Profile.js
+│   │   └── ...
+│   ├── services/
+│   │   ├── authService.js
+│   │   ├── quizService.js
+│   │   └── ...
+│   ├── App.js
+│   ├── index.js
+│   └── ...
+├── .env
+├── package.json
+└── ...
