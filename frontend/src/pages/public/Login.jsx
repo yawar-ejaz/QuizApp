@@ -8,7 +8,7 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = (data) => {
-    console.log(data);
+    console.log("data submitted in login page : ", data);
     reset();
     navigate("/dashboard");
   };

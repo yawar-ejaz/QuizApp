@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const CreatePassword = () => {
@@ -10,7 +10,13 @@ const CreatePassword = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
-  const { name, email, username } = location.state || {};
+    const { name, email, username } = location.state || {};
+    
+    useEffect(() => {
+      if (!name || !email || !username) {
+        navigate("/signup");
+      }
+    }, [name, email, username, navigate]);
 
   const handlePasswordSubmit = (e) => {
     e.preventDefault();
@@ -19,11 +25,9 @@ const CreatePassword = () => {
     } else if (password !== confirmedPassword) {
       setError("Passwords do not match");
     } else {
-      console.log("name i p : ", name);
-      console.log("email i p: ", email);
-      console.log("username i p: ", username);
-      console.log("password i p: ", password);
-      navigate("/dashboard", { state: { name, email, username, password } });
+      const data = { name, email, username, password };
+      console.log("data submitted in create-password page : ", data);
+      navigate("/dashboard", { state: data });
     }
   };
 

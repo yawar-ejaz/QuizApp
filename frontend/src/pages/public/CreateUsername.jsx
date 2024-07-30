@@ -17,9 +17,6 @@ const CreateUsername = () => {
   }, [name, email, navigate]);
 
   const handleUsernameSubmit = ({ username }) => {
-    console.log("name is: ", name);
-    console.log("email is: ", email);
-    console.log("username is: ", username);
     const usernameRegexCapital = /[A-Z]/;
     const usernameRegexCharacters = /^[a-z0-9._]+$/;
 
@@ -34,7 +31,9 @@ const CreateUsername = () => {
         'Username should not contain special characters except "_" and "."'
       );
     } else {
-      navigate("/create-password", { state: { name, email, username } });
+      const data = { name, email, username };
+      console.log("data submitted in create-username page : ", data);
+      navigate("/create-password", { state: data });
     }
   };
 
@@ -79,8 +78,8 @@ const CreateUsername = () => {
                   name="username"
                   className="input input-bordered w-full pr-12"
                   placeholder="Enter your username"
-                                  autoComplete="off"
-                                  value={"yawar"}
+                  autoComplete="off"
+                  value={"yawar"}
                   required
                   {...register("username")}
                 />
@@ -113,7 +112,7 @@ const CreateUsername = () => {
               <li>Username should not contain capital letters.</li>
               <li>
                 Username should not contain special characters except "_" and
-                ".".
+                "."
               </li>
               <li>
                 Username can contain numbers but should not start with a number.

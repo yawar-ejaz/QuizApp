@@ -4,8 +4,9 @@ import {
   Signup,
   CreateUsername,
   CreatePassword,
-  Dashboard,
 } from "./pages/public";
+import { Dashboard } from "./pages/private";
+
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
