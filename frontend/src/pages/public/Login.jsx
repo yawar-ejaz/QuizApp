@@ -1,16 +1,31 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import axios from "axios";
 
 const Login = () => {
   const navigate = useNavigate();
   const { handleSubmit, register, reset } = useForm();
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleLogin = (data) => {
-    console.log("data submitted in login page : ", data);
+  const handleLogin = async (data) => {
+    try {
+      console.log(data);
+      const result = await axios.post("/auth/login", data);
+      //   const user = {
+      //     name: result.data?.name,
+      //     email: result.data?.email,
+      //     username: result.data?.username,
+      //   };
+      //   localStorage.setItem("user", JSON.stringify(user));
+      alert("Login successful");
+      console.log("Login Successful");
+      navigate("/dashboard");
+    } catch (error) {
+      console.log(error);
+      alert("Invalid credentials");
+    }
     reset();
-    navigate("/dashboard");
   };
 
   return (
@@ -57,12 +72,12 @@ const Login = () => {
                   placeholder="Enter your password"
                   autoComplete="off"
                   required
-                //   value={"password"}
+                  value={"password"}
                   {...register("password")}
                 />
                 <button
                   type="button"
-                  onClick={()=>setShowPassword(!showPassword)}
+                  onClick={() => setShowPassword(!showPassword)}
                   className="absolute inset-y-0 right-0 flex items-center px-3 text-sm leading-5 text-blue-500 font-bold"
                 >
                   {showPassword ? "Hide" : "Show"}

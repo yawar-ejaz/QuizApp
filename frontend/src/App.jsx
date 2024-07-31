@@ -1,3 +1,4 @@
+import axios from "axios";
 import {
   Root,
   Login,
@@ -8,6 +9,8 @@ import {
 import { Dashboard } from "./pages/private";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+axios.defaults.baseURL = import.meta.env.VITE_SERVER_ADDRESS;
 
 function App() {
   return (

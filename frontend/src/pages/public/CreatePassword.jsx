@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import axios from "axios";
 
 const CreatePassword = () => {
   const [password, setPassword] = useState("");
@@ -10,24 +11,40 @@ const CreatePassword = () => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
-    const { name, email, username } = location.state || {};
-    
-    useEffect(() => {
-      if (!name || !email || !username) {
-        navigate("/signup");
-      }
-    }, [name, email, username, navigate]);
+  const { name, email, username } = location.state || {};
 
-  const handlePasswordSubmit = (e) => {
-    e.preventDefault();
+  useEffect(() => {
+    if (!name || !email || !username) {
+      navigate("/signup");
+    }
+  }, [name, email, username, navigate]);
+
+  const isValidPassword = (password, confirmedPassword) => {
     if (password.length < 7) {
       setError("Password should atleast have 7 letters");
+      return false;
     } else if (password !== confirmedPassword) {
       setError("Passwords do not match");
+      return false;
     } else {
+      return true;
+    }
+  };
+
+  const handlePasswordSubmit = async (e) => {
+    e.preventDefault();
+    if (isValidPassword(password, confirmedPassword)) {
       const data = { name, email, username, password };
       console.log("data submitted in create-password page : ", data);
-      navigate("/dashboard", { state: data });
+      try {
+        const result = await axios.post("/auth/signup", data);
+        alert("Account created successfully");
+        console.log("Account created successfully");
+        navigate("/dashboard");
+      } catch (error) {
+        console.log(error);
+        alert("Internal error");
+      }
     }
   };
 
