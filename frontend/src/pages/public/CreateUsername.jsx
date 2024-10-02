@@ -79,7 +79,7 @@ const CreateUsername = () => {
                   className="input input-bordered w-full pr-12"
                   placeholder="Enter your username"
                   autoComplete="off"
-                  value={"yawar"}
+                //   value={"yawar"}
                   required
                   {...register("username")}
                 />

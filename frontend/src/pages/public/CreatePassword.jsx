@@ -38,12 +38,13 @@ const CreatePassword = () => {
       console.log("data submitted in create-password page : ", data);
       try {
         const result = await axios.post("/auth/signup", data);
-        alert("Account created successfully");
-        console.log("Account created successfully");
+        alert(result.data.message);
+        console.log(result.data);
         navigate("/dashboard");
       } catch (error) {
         console.log(error);
-        alert("Internal error");
+          alert(error.response.data.message);
+          navigate("/signup");
       }
     }
   };
@@ -107,7 +108,7 @@ const CreatePassword = () => {
             <div className="mb-4">
               <label
                 className="block text-gray-700 text-sm font-bold mb-2"
-                htmlFor="confirmPassword"
+                htmlFor="confirmedPassword"
               >
                 Confirm Password
               </label>

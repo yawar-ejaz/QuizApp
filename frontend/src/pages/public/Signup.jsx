@@ -53,7 +53,7 @@ const Signup = () => {
                 placeholder="Enter your name"
                 autoComplete="off"
                 required
-                value={"Yawar Ejaz"}
+                // value={"Yawar Ejaz"}
                 {...register("name")}
               />
             </div>
@@ -72,7 +72,7 @@ const Signup = () => {
                 placeholder="Enter your email"
                 autoComplete="off"
                 required
-                value={"yawar@gmail.com"}
+                // value={"yawar@gmail.com"}
                 {...register("email")}
               />
             </div>

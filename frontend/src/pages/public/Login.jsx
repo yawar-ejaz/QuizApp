@@ -10,20 +10,11 @@ const Login = () => {
 
   const handleLogin = async (data) => {
     try {
-      console.log(data);
       const result = await axios.post("/auth/login", data);
-      //   const user = {
-      //     name: result.data?.name,
-      //     email: result.data?.email,
-      //     username: result.data?.username,
-      //   };
-      //   localStorage.setItem("user", JSON.stringify(user));
-      alert("Login successful");
-      console.log("Login Successful");
       navigate("/dashboard");
     } catch (error) {
       console.log(error);
-      alert("Invalid credentials");
+      alert(error.response.data.message);
     }
     reset();
   };
@@ -52,7 +43,7 @@ const Login = () => {
                 placeholder="Enter your email or username"
                 autoComplete="off"
                 required
-                value={"yawar@gmail.com"}
+                // value={"yawar@gmail.com"}
                 {...register("emailOrUsername")}
               />
             </div>
@@ -72,7 +63,7 @@ const Login = () => {
                   placeholder="Enter your password"
                   autoComplete="off"
                   required
-                  value={"password"}
+                //   value={"password"}
                   {...register("password")}
                 />
                 <button

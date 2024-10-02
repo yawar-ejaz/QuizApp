@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require("express");
+const connectDb = require("./utils/database");
 const auth = require("./routes/auth");
 const cors = require("cors");
 
@@ -11,6 +12,7 @@ app.use(cors({
     origin: process.env.CLIENT_ADDRESS
 }));
 
+connectDb();
 app.use("/auth", auth);
 
 const startServer = () => {
