@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { jwtDecode } from "jwt-decode";
+import React, { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar";
 import { Bar } from "react-chartjs-2";
 import {
@@ -58,10 +59,36 @@ const options = {
 };
 
 const Dashboard = () => {
+//   const [userDetails, setUserDetails] = useState({
+//     name: "",
+//     username: "",
+//     email: "",
+//   });
+    
+    // useEffect(() => {
+      // Retrieve the token from localStorage
+      const token = localStorage.getItem("token");
+    console.log(token);
+    let name1=""
+
+      if (token) {
+        // Decode the token to get user information
+        const decodedToken = jwtDecode(token);
+
+        // Extract user details from the token
+          const { name, username, email } = decodedToken;
+          name1 = name;
+
+        // Save the extracted details in state
+        // setUserDetails({ name, username, email });
+      }
+    // }, [])
+
+  
   return (
     <div className="min-h-screen bg-white">
       {/* Navbar */}
-      <Navbar username="Yawar Ejaz" />
+      <Navbar username={name1} />
 
       {/* Main Content */}
       <div className="h-[85vh] p-8 flex flex-col lg:flex-row space-y-8 lg:space-y-0 lg:space-x-8">

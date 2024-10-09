@@ -7,7 +7,7 @@ const Signup = () => {
   const { handleSubmit, register, reset } = useForm();
 
   const handleSignup = (data) => {
-    console.log("data submitted in signup page : ", data);
+    // console.log("data submitted in signup page : ", data);
     navigate("/create-username", { state: data });
   };
 

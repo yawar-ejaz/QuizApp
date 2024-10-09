@@ -1,19 +1,32 @@
+const jwt = require("jsonwebtoken");
 const Users = require("../models/users");
 
 const login = async (req, res) => {
   const { emailOrUsername, password } = req.body;
   try {
-    const existingUser = await Users.findOne({ email: emailOrUsername });
+    const existingUser = await Users.findOne({
+      $or: [{ email: emailOrUsername }, { username: emailOrUsername }],
+    });
 
     if (!existingUser) {
       return res.status(400).json({
-        message: "User not exists!",
+        message: "No such user exists",
       });
     }
 
     if (password === existingUser.password) {
+      const token = jwt.sign(
+        {
+          userId: existingUser._id,
+          email: existingUser.email,
+          username: existingUser.username,
+          name: existingUser.name,
+        },
+        process.env.JWT_SECRET,
+        { expiresIn: "1h" }
+      );
       return res.status(200).json({
-        existingUser,
+        token,
       });
     }
 
@@ -21,6 +34,7 @@ const login = async (req, res) => {
       message: "Incorrect password",
     });
   } catch (error) {
+    console.log(error);
     res.status(500).json({
       message: "Failed to login",
     });
@@ -56,10 +70,19 @@ const createUser = async (req, res) => {
       password,
     });
 
+    const token = jwt.sign(
+      {
+        userId: user._id,
+        email: user.email,
+        username: user.username,
+        name: user.name,
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: "1h" }
+    );
+
     res.status(201).json({
-      name: user.name,
-      email: user.email,
-      message: "Account created successfully",
+      token
     });
   } catch (error) {
     console.log(error);

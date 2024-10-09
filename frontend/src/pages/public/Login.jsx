@@ -11,6 +11,8 @@ const Login = () => {
   const handleLogin = async (data) => {
     try {
       const result = await axios.post("/auth/login", data);
+    //   console.log(result.data);
+      localStorage.setItem("token", result.data.token);
       navigate("/dashboard");
     } catch (error) {
       console.log(error);
@@ -63,7 +65,7 @@ const Login = () => {
                   placeholder="Enter your password"
                   autoComplete="off"
                   required
-                //   value={"password"}
+                  //   value={"password"}
                   {...register("password")}
                 />
                 <button

@@ -35,11 +35,10 @@ const CreatePassword = () => {
     e.preventDefault();
     if (isValidPassword(password, confirmedPassword)) {
       const data = { name, email, username, password };
-      console.log("data submitted in create-password page : ", data);
+    //   console.log("data submitted in create-password page : ", data);
       try {
         const result = await axios.post("/auth/signup", data);
-        alert(result.data.message);
-        console.log(result.data);
+        localStorage.setItem("token", result.data.token);
         navigate("/dashboard");
       } catch (error) {
         console.log(error);
