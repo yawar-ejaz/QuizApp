@@ -1,19 +1,28 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { jwtDecode } from "jwt-decode";
+import useAuthContext from "../../hooks/useAuthContext";
+import { ACTIONS } from "../../contexts/authContext";
 import axios from "axios";
 
 const Login = () => {
   const navigate = useNavigate();
+  const { dispatch } = useAuthContext();
   const { handleSubmit, register, reset } = useForm();
   const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = async (data) => {
     try {
       const result = await axios.post("/auth/login", data);
-    //   console.log(result.data);
-      localStorage.setItem("token", result.data.token);
-      navigate("/dashboard");
+        console.log(result.data.token);
+        console.log(jwtDecode(result.data.token));
+    //   localStorage.setItem("token", result.data.token);
+    //   dispatch({
+    //     type: ACTIONS.LOGIN,
+    //     payload: user,
+    //   });
+    //   navigate("/dashboard");
     } catch (error) {
       console.log(error);
       alert(error.response.data.message);

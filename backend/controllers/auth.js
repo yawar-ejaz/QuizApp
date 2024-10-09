@@ -17,7 +17,6 @@ const login = async (req, res) => {
     if (password === existingUser.password) {
       const token = jwt.sign(
         {
-          userId: existingUser._id,
           email: existingUser.email,
           username: existingUser.username,
           name: existingUser.name,
